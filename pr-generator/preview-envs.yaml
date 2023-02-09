@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ephemeral-envs
+spec:
+  generators:
+  - matrix:
+      generators:
+      - pullRequest:
+          github:
+            owner: akuity
+            repo: test
+            tokenRef:
+              key: pat
+              secretName: argocd-secret
+          requeueAfterSeconds: 120
+      - clusters:
+          selector:
+            matchLabels:
+              preview: 'true'
+  template:
+    metadata:
+      name: 'guestbook-pr-{{number}}'
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:akuity/test.git
+        targetRevision: '{{head_sha}}'
+        path: 'guestbook'
+      destination:
+        server: '{{server}}'
+        namespace: 'pr-{{number}}'
+      syncPolicy:
+        automated:
+          prune: true
+        syncOptions:
+        - CreateNamespace=true
