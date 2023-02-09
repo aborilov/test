@@ -20,11 +20,11 @@ spec:
               preview: 'true'
   template:
     metadata:
-      name: 'guestbook-pr-{{number}}'
+      name: 'guestbook-pr-test-{{number}}'
     spec:
       project: default
       source:
-        repoURL: git@github.com:akuity/test.git
+        repoURL: git@github.com:aborilov/test.git
         targetRevision: '{{head_sha}}'
         path: 'guestbook'
       destination:
