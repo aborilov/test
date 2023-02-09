@@ -8,7 +8,7 @@ spec:
       generators:
       - pullRequest:
           github:
-            owner: akuity
+            owner: aborilov
             repo: test
             tokenRef:
               key: pat
