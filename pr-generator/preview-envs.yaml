@@ -20,7 +20,7 @@ spec:
               preview: 'true'
   template:
     metadata:
-      name: 'guestbook-pr-{{number}}'
+      name: 'guestbook-pr-test-{{number}}'
     spec:
       project: default
       source:
